@@ -1,4 +1,7 @@
 
+/**
+ * Define routes for sauces
+ */
 const express = require("express");
 const auth = require("../middleware/auth");
 const SauceController = require("../controllers/SauceController");

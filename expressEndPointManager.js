@@ -1,4 +1,10 @@
 
+/**
+ * Configure :
+ *  - access to database
+ *  - error managment
+ *  - endpoints
+ */
 const express = require("express");
 const Path = require("path");
 const bodyParser = require('body-parser');

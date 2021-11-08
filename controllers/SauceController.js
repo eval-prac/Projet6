@@ -1,9 +1,20 @@
 
+/**
+ * Controller for sauces
+ */
 const UserEntity = require("../models/UserEntity");
 const SauceEntity = require("../models/SauceEntity");
 
 const SauceController = {};
 
+/**
+ * Add one sauce in the database
+ * Store the picture on FS if exist
+ * Store the url of the picture in the database
+ * @param {} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 SauceController.create= (req, resp, next) => {
     const sauce = JSON.parse(req.body.sauce);
     delete sauce._id;
@@ -20,6 +31,14 @@ SauceController.create= (req, resp, next) => {
         .then(sauceEntity => resp.status(201).json({message:"Sauce created"}) )
         .catch(error => resp.status(500).json({error}) );
 };
+
+/**
+ * Update one sauce
+ * Upload the new image if available
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 SauceController.update= (req, resp, next) => {
     let sauce;
     if ( req.body.sauce===undefined ) {
@@ -35,6 +54,12 @@ SauceController.update= (req, resp, next) => {
     .catch(error => resp.status(500).json({error}) );
 };
 
+/**
+ * Return all sauces
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 SauceController.findAll= (req, resp, next) => {
     SauceEntity.find()
         .then( sauceEntityList => {
@@ -44,18 +69,38 @@ SauceController.findAll= (req, resp, next) => {
             return resp.status(500).json({error});
         });
 };
+
+/**
+ * return one sauce
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 SauceController.find= (req, resp, next) => {
     SauceEntity.findOne({_id:req.params.id})
         .then(sauceEntity => resp.status(200).json(sauceEntity) )
         .catch(error => resp.status(500).json({error}));
 };
+
+/**
+ * Delete one sauce of the database
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 SauceController.delete= (req, resp, next) => {
     SauceEntity.deleteOne({_id:req.params.id})
         .then(sauceEntity => resp.status(200).json({message:"Sauce deleted"}) )
         .catch(error => resp.status(500).json({error}));
 };
-SauceController.like= (req, resp, next) => {
 
+/**
+ * Udapte the likes of the user as requeted
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
+SauceController.like= (req, resp, next) => {
     SauceEntity.findOne({_id:req.params.id})
     .then(sauceEntity => {
         const userId = req.body.userId;

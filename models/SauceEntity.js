@@ -1,4 +1,7 @@
 
+/**
+ * Define the Sauces' storage
+ */
 const mongoose = require("mongoose");
 
 const sauceSchema = mongoose.Schema({

@@ -1,6 +1,9 @@
 
 const http = require("http");
 
+/**
+ * Launch http serveur on expressEndPointManager
+ */
 const expressEndPointManager = require("./expressEndPointManager");
 expressEndPointManager.set("port",3000);
 const server= http.createServer(expressEndPointManager);

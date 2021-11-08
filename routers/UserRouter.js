@@ -1,4 +1,7 @@
 
+/**
+ * Define routes for users
+ */
 const express = require("express");
 const UserController = require("../controllers/UserController");
 

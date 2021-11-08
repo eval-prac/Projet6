@@ -1,4 +1,7 @@
 
+/**
+ * Configuration setup for token security
+ */
 const jsonwebtoken = require("jsonwebtoken");
 
 const auth = (req, resp, next) => {
@@ -9,6 +12,7 @@ const auth = (req, resp, next) => {
         if (req.header.userId && req.header.userId!==userId) {
             throw new Error("Invalid user ID");
         }
+        req.userId=userID; 
         next();
     } catch (ex) {
         return resp.status("401").json({ "message":ex.stack });

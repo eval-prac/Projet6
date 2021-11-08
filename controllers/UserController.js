@@ -1,10 +1,20 @@
 
+/**
+ * Controller for users
+ */
 const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const UserEntity = require("../models/UserEntity");
 
 UserController = {};
 
+/**
+ * Signup new user and store in the database.
+ * Bcrypt encryption of password
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 exports.signup = (req, resp, next)=> {
     bcrypt.hash(req.body.password, 10)
         .then( hash => {
@@ -15,6 +25,15 @@ exports.signup = (req, resp, next)=> {
         })
         .catch( error => resp.status(500).json({error}) );
 }
+
+/**
+ * Login an existing user of the database.
+ * Usage og bcrypt to security check of the right password
+ * Generate a temporary token to the webClient
+ * @param {*} req 
+ * @param {*} resp 
+ * @param {*} next 
+ */
 exports.login = (req, resp, next)=> {
     UserEntity.findOne({email:req.body.email})
     .then(userEntity => {

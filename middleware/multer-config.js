@@ -1,3 +1,7 @@
+
+/**
+ * Configuration setup for images upload
+ */
 const multer = require('multer');
 
 const storage = multer.diskStorage({
